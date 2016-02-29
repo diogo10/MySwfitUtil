@@ -1,0 +1,16 @@
+class Util {
+
+    /**
+     Method to format CMTime. The output format is 00:00:00
+     */
+    func formatTime(let value: CMTime)-> String{
+        let durationSeconds: Int = Int(CMTimeGetSeconds(value))
+        let hours: Int = Int(durationSeconds / 3600)
+        let minutes: Int = Int(durationSeconds % 3600 / 60)
+        let seconds: Int = Int(durationSeconds % 3600 % 60)
+        let time2: String = String(format: "%02ld:%02ld:%02ld", hours, minutes, seconds)
+        return time2
+    }
+
+
+}
