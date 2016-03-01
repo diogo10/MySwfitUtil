@@ -20,5 +20,14 @@ class MacOSUtil {
   
   }
 
+    //alert message
+    func showMessage(let value: String){
+        let alert = NSAlert.init()
+        alert.messageText = value
+        alert.addButtonWithTitle("Ok")
+        alert.runModal()
+    }
+
+
 
 }
