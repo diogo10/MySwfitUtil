@@ -96,6 +96,20 @@ class MacOSUtil {
       
     }
     
-    
+     /**
+     Method to execture ffmpeg commands
+     
+     Make sure that you have the ffmpeg file on your project
+     
+     */
+    func execFFmpeg(commandLine: String) -> Int32 {
+        
+        if let path = NSBundle.mainBundle().pathForResource("ffmpeg", ofType:"") {
+            return system("\(path) \(commandLine)")
+        }else{
+            print("no path")
+            return 999
+        }
+    }
     
 }
