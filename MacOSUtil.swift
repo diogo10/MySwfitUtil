@@ -112,4 +112,60 @@ class MacOSUtil {
         }
     }
     
+    
+    /**
+     Method to generate a thumbnail from url. The url can be from the internet or a local file.
+     
+     Ex: myUtils.generateThumbnail(NSURL(string: localVideo!)!, timeTo: startTime)
+     
+     */
+    func generateThumbnail(url : NSURL, timeTo: CMTime) -> NSImage{
+        let asset = AVAsset(URL: url)
+        let assetImgGenerate : AVAssetImageGenerator = AVAssetImageGenerator(asset: asset)
+        assetImgGenerate.appliesPreferredTrackTransform = true
+        var thumbnail : CGImageRef!
+        
+        do{
+            thumbnail = try assetImgGenerate.copyCGImageAtTime(timeTo, actualTime: nil)
+            
+        }catch let error as NSError{
+            print(error.localizedDescription)
+        }
+        return NSImage.init(CGImage: thumbnail, size: NSZeroSize)
+    }
+    
+    
+    /**
+     Method to generate a png image from a NSImage. The fileName must have the type as well...example: test.png
+     */
+    func saveNSImageIntoDisk(image: NSImage, fileName: String) -> String{
+        let documentsDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+        let trimmedFileURL = documentsDirectory.URLByAppendingPathComponent(fileName)
+        let aa = image.TIFFRepresentation
+        
+        if aa!.writeToFile(trimmedFileURL.path!, atomically: true){
+            return trimmedFileURL.path!
+        }else{
+            return ""
+        }
+        
+        
+    }
+    
+    /**
+     Method to remove file from main document folder.
+     */
+    func removeVideo(fileName: String) {
+        let documentsDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+        let trimmedFileURL = documentsDirectory.URLByAppendingPathComponent(fileName)
+        let filemanager = NSFileManager.defaultManager()
+        
+        do{
+            try filemanager.removeItemAtURL(trimmedFileURL)
+        }catch{
+            print("previous file doesn't exist")
+        }
+        
+    }
+    
 }
