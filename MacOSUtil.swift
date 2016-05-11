@@ -168,4 +168,17 @@ class MacOSUtil {
         
     }
     
+     /**
+     Method to animate a view.
+     */
+    func animView(view:NSView) {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.10
+        animation.repeatCount = 2
+        animation.autoreverses = true
+        animation.fromValue =  NSValue(point: CGPointMake(view.frame.origin.x - 10, view.frame.origin.y ))
+        animation.toValue =  NSValue(point: CGPointMake(view.frame.origin.x + 10, view.frame.origin.y ))
+        view.layer?.addAnimation(animation, forKey: "position")
+    }
+    
 }
