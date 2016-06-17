@@ -1,6 +1,5 @@
 //
 //  AppDelegate.swift
-//  JampaBusIOS
 //
 //  Created by Diogo Henrique on 30/08/2015.
 //  Copyright (c) 2015 Diogo Henrique. All rights reserved.
@@ -89,6 +88,12 @@ extension String
     
     var localized: String {
         return NSLocalizedString(self, tableName: nil, bundle: NSBundle.mainBundle(), value: "", comment: "")
+    }
+    
+    func subString(startIndex: Int, length: Int) -> String
+    {
+        let range = self.startIndex.advancedBy(startIndex) ..< self.startIndex.advancedBy(length)
+        return self.substringWithRange(range)
     }
 }
 
