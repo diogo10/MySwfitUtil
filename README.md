@@ -1,3 +1,3 @@
 # MySwiftUtil
 
-Utils methods to daily life. Add more dude
+Utils methods to daily life.
