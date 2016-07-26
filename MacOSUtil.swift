@@ -181,4 +181,15 @@ class MacOSUtil {
         view.layer?.addAnimation(animation, forKey: "position")
     }
     
+     /**
+     Get the video CGSize
+     
+        * Example: 640:360
+    */
+    func resolutionSizeForVideo(url:NSURL) -> CGSize? {
+        guard let track = AVAsset(URL: url).tracksWithMediaType(AVMediaTypeVideo).first else { return nil }
+        let size = CGSizeApplyAffineTransform(track.naturalSize, track.preferredTransform)
+        return CGSize(width: fabs(size.width), height: fabs(size.height))
+    }
+    
 }
