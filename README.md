@@ -1,3 +1,3 @@
 # MySwiftUtil
 
-Utils methods to daily life.
+Util methods to daily life.
