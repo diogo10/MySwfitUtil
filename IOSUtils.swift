@@ -30,4 +30,54 @@ class IOSUtils {
         
     }
     
+    
+    /**
+        App version.
+     
+        - Returns: "1.0"
+     
+    */
+    func appVersion() -> String {
+        let dictionary = Bundle.main.infoDictionary!
+        let version = dictionary["CFBundleShortVersionString"] as! String
+        _ = dictionary["CFBundleVersion"] as! String
+        return version
+    }
+
+    /**
+        Get formated current date.
+     
+        - Returns: "EEE, dd MMM yyyy HH:mm"
+    */
+    func formatCurrentDate() -> String {
+        let dayTimePeriodFormatter = DateFormatter()
+        dayTimePeriodFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm"
+        let dateString = dayTimePeriodFormatter.string(from: Date())
+        return dateString
+    }
+    
+    /**
+        Simple time ago.
+     
+        - Parameter dateLong: date time.
+        - Returns: "Today", "Yesterday" or "x days ago"
+     
+    */
+    
+    
+    func formatDateTimeAgo(dateLong: Double) -> String {
+       
+        let days = (Constants.Time.currentTimeNow() - dateLong) / 86400000;
+        
+        if days == 0 {
+            return "Today";
+        }else if days == 1 {
+            return "Yesterday"
+        }else {
+             return "\(Int(days)) days ago";
+        }
+    }
+    
+    
+    
 }
